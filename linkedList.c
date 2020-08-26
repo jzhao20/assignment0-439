@@ -43,6 +43,21 @@ void add(int val){
 		}
 	}
 }
+int remove(int val){
+	struct node * current = buffer->next;
+	while(current != buffer){
+		if(current->val == val)break;
+		current = current->next;
+	}
+	if(current == buffer)return 0;
+	else
+	{
+		current->prev->next = current->next;
+		current->next->prev = current->prev;
+		free(current);
+		return 1;
+	}
+}
 int main(){
 	buffer= (struct node*)malloc(sizeof(struct node));
 	buffer->val = NULL;
@@ -52,5 +67,16 @@ int main(){
 	add(5);
 	add(2);
 	add(4);
+	check();
+	printf("checking remove\n");
+	remove(2);
+	check();
+	remove(3);
+	check();
+	remove(1);
+	check();
+	remove(5);
+	check();
+	remove(4);
 	check();
 }
