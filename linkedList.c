@@ -3,8 +3,7 @@ struct node{
 	int val;
 	struct node*next,*prev;
 };
-struct node *buffer;
-void check(){
+void check(struct node *buffer){
 	struct node* iterator = buffer;
 	iterator = iterator->next;
 	while(iterator != buffer){
@@ -12,7 +11,7 @@ void check(){
 		iterator= iterator->next;
 	}
 }
-void add(int val){
+void add(struct node* buffer, int val){
 	struct node* node = (struct node*)malloc(sizeof(struct node));
 	node->val = val;
 	if(buffer->next ==buffer){
@@ -43,7 +42,7 @@ void add(int val){
 		}
 	}
 }
-int remove(int val){
+int remove(struct node* buffer, int val){
 	struct node * current = buffer->next;
 	while(current != buffer){
 		if(current->val == val)break;
@@ -59,24 +58,24 @@ int remove(int val){
 	}
 }
 int main(){
-	buffer= (struct node*)malloc(sizeof(struct node));
+	struct node* buffer= (struct node*)malloc(sizeof(struct node));
 	buffer->val = NULL;
 	buffer->next=buffer->prev=buffer;
-	add(3);
-	add(1);
-	add(5);
-	add(2);
-	add(4);
-	check();
+	add(buffer, 3);
+	add(buffer, 1);
+	add(buffer, 5);
+	add(buffer, 2);
+	add(buffer, 4);
+	check(buffer);
 	printf("checking remove\n");
-	remove(2);
-	check();
-	remove(3);
-	check();
-	remove(1);
-	check();
-	remove(5);
-	check();
-	remove(4);
-	check();
+	remove(buffer ,2);
+	check(buffer);
+	remove(buffer, 3);
+	check(buffer);
+	remove(buffer, 1);
+	check(buffer);
+	remove(buffer, 5);
+	check(buffer);
+	remove(buffer, 4);
+	check(buffer);
 }
